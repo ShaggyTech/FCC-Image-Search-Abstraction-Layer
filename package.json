@@ -1,0 +1,32 @@
+{
+  "name": "Imgur-Search-Abstraction-Layer",
+  "version": "1.0.0",
+  "description": "Built with node.js and express.js for https://www.freecodecamp.org/challenges/image-search-abstraction-layer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "mongodb": "*",
+    "request": "*",
+    "request-promise": "*"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://github.com/ShaggyTech/FCC-Image-Search-Abstraction-Layer"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express",
+    "freecodecamp",
+    "fcc",
+    "imgur",
+    "search",
+    "api"
+  ]
+}
