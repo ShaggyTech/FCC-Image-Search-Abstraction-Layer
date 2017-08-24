@@ -1,23 +1,23 @@
 'require strict'
 
-const rp = require('request-promise')
+const request = require('request-promise'),
+      Database = require('./database')
 
-const parseImgurResponse = (result) => {
-  return new Promise((resolve) => {
-    const parsedResult = JSON.parse(result)
-    const parsedData = parsedResult.data.map((d) => {
+const parseImgurResponse = async (searchResults) => {
+    const parsedResult = await JSON.parse(searchResults)
+    const parsedData = await parsedResult.data.map((data) => {
       return {
-        title: d.title,
-        link: d.link,
-        is_album: d.is_album,
-        nsfw: d.nsfw
+        title: data.title,
+        link: data.link,
+        is_album: data.is_album,
+        nsfw: data.nsfw
       }
     })
-    resolve(parsedData)
-  })
+    return parsedData
 }
 
-const searchGalleries = (queryString, page) => {
+const search = async (queryString, page, userIP) => {
+  //console.log(Database.insert())
   let options = { 
     method: 'GET',
     url: `https://api.imgur.com/3/gallery/search/score/all/${page}`,
@@ -27,15 +27,15 @@ const searchGalleries = (queryString, page) => {
     },
     headers: {authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`}
   }
-
-  return rp(options)
-  .then((response) => {
-    return parseImgurResponse(response)
-  })
+  
+  const imgurResponse = await request(options)
+  const searchMeta = await Database.insert({search: queryString, time: new Date(), ip: userIP})
+  const parsedData = await parseImgurResponse(imgurResponse)
+  return parsedData
 }
 
 const Imgur = {
-  searchGalleries: searchGalleries
+  search: search
 }
 
 module.exports = Imgur
