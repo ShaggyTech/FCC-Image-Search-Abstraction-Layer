@@ -14,9 +14,10 @@ let initialized = false;
 app.use(express.static('public'));
 
 app.get('/api', Helpers.asyncErrorCatcher(async (req, res, next) => {
-  Imgur.searchGalleries("lol cats", 1)
-  .then((imgurResponse) => {
-    res.send(imgurResponse)
+  const userIP = req.headers['x-forwarded-for'].split(',')[0]
+  Imgur.search("dogs", 1, userIP)
+  .then((searchResults) => {
+    res.send(searchResults)
   }).catch(next)
 }))
 
