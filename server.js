@@ -5,6 +5,7 @@ const express = require('express'),
       Database = require('./modules/database'),  // Database functions
       Helpers = require('./modules/helpers'),
       Imgur = require('./modules/imgur'),
+      History = require('./modules/history'),
       app = express();
 
 // Lets us know if Database.connect() has been called once since the app started
@@ -13,12 +14,33 @@ let initialized = false;
 // Static Home page
 app.use(express.static('public'));
 
-app.get('/api', Helpers.asyncErrorCatcher(async (req, res, next) => {
-  const userIP = req.headers['x-forwarded-for'].split(',')[0]
-  Imgur.search("dogs", 1, userIP)
-  .then((searchResults) => {
-    res.send(searchResults)
-  }).catch(next)
+app.get('/api/imgsearch', Helpers.asyncErrorCatcher(async (req, res, next) => {
+  const history = await History.getHistory()
+  res.json(history)
+}))
+
+app.get('/api/imgsearch/:param', Helpers.asyncErrorCatcher(async (req, res, next) => {
+  //const userIP = req.headers['x-forwarded-for'].split(',')[0]
+  const offset = req.query.offset
+  
+  if (Object.keys(req.query).length > 0) {
+    if (offset) {
+      if (offset < 1 || isNaN(offset) || offset > 165) {
+        res.json({"error": 'Invalid offset entered. Provided offset must be a positive integer no greater than 165'})
+      }
+      else {
+        const searchResults = await Imgur.search(req.params.param, offset /* , userIP */ )
+        res.json(searchResults)
+      }
+    }
+    else {
+      res.json({error: 'invalid query entered, usage example: /api/imgsearch/lolcats?offset=1'})
+    }
+  }
+  else {
+    const searchResults = await Imgur.search(req.params.param, null /* , userIP */ )
+    res.json(searchResults)
+  }
 }))
 
 // Do something with the caught errors from Helpers.asyncErrorCatcher()
