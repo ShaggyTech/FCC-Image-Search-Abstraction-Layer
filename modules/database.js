@@ -9,16 +9,19 @@ const MONGODB_URI = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+proce
 // Populated when connect() is called
 let collection   // Stores the database collection for persistent use
 
-// Inserts a new urls object into the database collection
-// Returns inserted document after insertion completes
-const insert = (obj) => {
-  return (collection.insertOne(obj), obj)
+const insertUpdate = async (queryString) => {
+  return await collection.findOneAndUpdate(
+    {search: queryString},
+    {$set: {lastModified: Date.now()}},
+    {upsert: true}
+  )
 }
 
-// Returns the complete database object (excluding the _id field) if the key:value was found
-// Returns undefined if there was no match in the database
-const find = (key, value) => {
-  return collection.findOne({[key]: {$eq: value}},{_id: 0})
+const findUnique = async () => {
+  return await collection.find({}, {_id: 0, lastModified: 0})
+  .sort({lastModified: -1})
+  .limit(20)
+  .toArray()
 }
 
 // Called once after the first request is made to the server
@@ -32,8 +35,8 @@ const connect = async (hostname) => {
 }
 
 const Database = {
-  insert: insert,
-  find: find,
+  findUnique: findUnique,
+  insertUpdate: insertUpdate,
   connect: connect
 }
 

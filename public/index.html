@@ -18,40 +18,39 @@
    <body>
       <div class="container">
         <div id="main">
-          <h1>API BASEJUMP: URL Shortener Microservice</h1>
+          <h1>API BASEJUMP: Image Search Abstraction Layer</h1>
           <h3>
             User stories:
           </h3>
           <ol>
-             <li>I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.</li>
-             <li>If I pass an invalid URL that doesn't follow the valid http://www.example.com format, the JSON response will contain an error instead.</li>
-             <li>IWhen I visit that shortened URL, it will redirect me to my original link.</li>
+             <li>I can get the image URLs, alt text and page urls for a set of images relating to a given search string.</li>
+             <li>I can paginate through the responses by adding a ?offset=2 parameter to the URL.</li>
+             <li>I can get a list of the most recently submitted search strings.</li>
           </ol>
 
           <h2>
-            Example - Create a new shortened URL:
+            The search engine returns image data using the Imgur API<br/><br/>
+            Example - Image Search:
           </h2>
-          <code>https://gigantic-honey.glitch.me/new/&ltFULL_URL_TO_BE_SHORTENED&gt</code><br />
-          <a href="https://gigantic-honey.glitch.me/new/https://www.shaggytech.com/calculator">
-            <code>https://gigantic-honey.glitch.me/new/https://www.shaggytech.com/calculator</code>
+          <code>https://paper-wilderness.glitch.me/api/imgsearch/&ltSEARCH_PHRASE&gt</code><br />
+          <a href="https://paper-wilderness.glitch.me/api/imgsearch/lolcats">
+            <code>https://paper-wilderness.glitch.me/api/imgsearch/lolcats</code>
+          </a>
+          <br />
+          <h2>
+            Example - Image Search With Page Offset:
+          </h2>
+          <code>https://paper-wilderness.glitch.me/api/imgsearch/&ltSEARCH_PHRASE&gt?offset=&ltOFFSET_NUMBER_BETWEEN_1_AND_165_INCLUSIVE&gt</code><br />
+          <a href="https://paper-wilderness.glitch.me/api/imgsearch/lolcats?offset=2">
+            <code>https://paper-wilderness.glitch.me/api/imgsearch/lolcats?offset=2</code>
           </a>
           <br />
           <h3>
-            Example - Output after creation:
+            Example - Search Results:
           </h3>
           <code>
-            { "original":"https://www.shaggytech.com/calculator", "short":"https://gigantic-honey.glitch.me/aue-aulas" }
+            {"result":[{"title":"TIL LOLcats look like hellcats after you render them in black-and-white.","link":"http://i.imgur.com/zUjbodZ.gif","is_album":false,"nsfw":false},...]}
           </code>
-          <h3>
-            Example - Usage:
-          </h3>
-          <a href="https://gigantic-honey.glitch.me/spyre-coldcocked" target="_blank">
-            <code>https://gigantic-honey.glitch.me/spyre-coldcocked</code>
-          </a>
-          <h4>
-            Redirects to:
-          </h4>
-          <code>https://www.shaggytech.com</code>
         </div>
       </div>
    </body>
