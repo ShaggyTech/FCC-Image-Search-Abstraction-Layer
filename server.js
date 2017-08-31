@@ -2,6 +2,7 @@
 
 // NPM Packages and other 
 const express = require('express'),
+      cors = require('cors'), 
       Database = require('./modules/database'),  // Database functions
       Helpers = require('./modules/helpers'),
       Imgur = require('./modules/imgur'),
@@ -10,6 +11,9 @@ const express = require('express'),
 
 // Lets us know if Database.connect() has been called once since the app started
 let initialized = false;
+
+require('dotenv').config()
+app.use(cors());
 
 // Static Home page
 app.use(express.static('public'));

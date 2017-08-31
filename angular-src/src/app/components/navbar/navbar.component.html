@@ -1,0 +1,33 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle navbar-toggler collapsed" data-toggle="collapse" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+        aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" [routerLink]="['/']">Imgur-Search</a>
+    </div>
+    <div [ngbCollapse]="!isNavbarCollapsed" id="navbar" class="collapse navbar-collapse navbar-toggleable">
+      <ul class="nav navbar-nav navbar-left">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+          <a [routerLink]="['/']">Home</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+          <a [routerLink]="['/search']">Search</a>
+        </li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+          <a [routerLink]="['/history']">History</a>
+        </li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+          <a [routerLink]="['/api']">API</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>

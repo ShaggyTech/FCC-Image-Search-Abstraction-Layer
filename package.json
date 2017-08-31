@@ -7,6 +7,8 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
     "express": "*",
     "mongodb": "*",
     "request": "*",
@@ -28,5 +30,6 @@
     "imgur",
     "search",
     "api"
-  ]
+  ],
+  "devDependencies": {}
 }

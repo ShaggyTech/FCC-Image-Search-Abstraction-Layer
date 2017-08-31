@@ -2,6 +2,7 @@
 
 // NPM Packages
 const mongo = require('mongodb')
+require('dotenv').config()
 
 // URI string used to connect to the mongodb service - this app uses mlab.com
 const MONGODB_URI = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.DBPORT+'/'+process.env.DB;
