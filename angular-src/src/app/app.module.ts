@@ -16,6 +16,7 @@ import { ApiComponent } from './components/api/api.component';
 
 import {GetHistoryService} from './services/get-history.service';
 import {SearchService} from './services/search.service';
+import { ImagesComponent } from './components/images/images.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomepageComponent},
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
     HomepageComponent,
     HistoryComponent,
     SearchComponent,
-    ApiComponent
+    ApiComponent,
+    ImagesComponent
   ],
   imports: [
     BrowserModule,

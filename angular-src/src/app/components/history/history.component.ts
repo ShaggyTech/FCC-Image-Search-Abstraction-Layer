@@ -8,7 +8,7 @@ import {GetHistoryService} from '../../services/get-history.service'
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  history:Object
+  history:Array<string>
 
   constructor(private gethistoryService:GetHistoryService, private router:Router) { }
 
@@ -16,7 +16,6 @@ export class HistoryComponent implements OnInit {
     
     this.gethistoryService.getHistory().subscribe(history => {
       this.history = history.history
-      console.log(history)
     })
   }
 

@@ -1,0 +1,6 @@
+<div *ngIf="searchResults">
+  <label for="results">Search Results:</label>
+  <ul class="list-group text-center">
+    <li *ngFor="let image of searchResults" class="list-group-item list-group-item-primary">{{image}}</li>
+  </ul>
+</div>

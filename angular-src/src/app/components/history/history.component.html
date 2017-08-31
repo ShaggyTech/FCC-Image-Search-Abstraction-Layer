@@ -1,9 +1,7 @@
-<div class="container">
-  <div *ngIf="history" id="historyList">
-    <ul class="list-group text-center">
-      <li class="list-group-item list-group-item-info">Search History:</li>
+<div *ngIf="history" id="historyList">
+  <ul class="list-group text-center">
+    <li class="list-group-item list-group-item-info">Search History:</li>
 
-      <li *ngFor="let item of history" class="list-group-item list-group-item-primary">{{item}}</li>
-    </ul>
-  </div>
+    <li *ngFor="let item of history" class="list-group-item list-group-item-primary">{{item}}</li>
+  </ul>
 </div>

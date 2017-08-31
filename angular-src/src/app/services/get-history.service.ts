@@ -4,7 +4,6 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class GetHistoryService {
-  history:object
 
   constructor(private http:Http) { }
 

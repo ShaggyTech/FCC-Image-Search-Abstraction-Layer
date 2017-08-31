@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core'
 import {SearchService} from '../../services/search.service'
-import {Router} from '@angular/router';
+import {Router} from '@angular/router'
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  selector: 'app-images',
+  templateUrl: './images.component.html',
+  styleUrls: ['./images.component.css']
 })
-export class SearchComponent implements OnInit {
+export class ImagesComponent implements OnInit {
   searchString: String
   searchResults:Array<Object>
 
