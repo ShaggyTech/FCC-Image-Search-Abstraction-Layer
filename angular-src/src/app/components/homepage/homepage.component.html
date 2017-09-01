@@ -10,10 +10,26 @@
 </div>
 
 <div *ngIf="searchResults">
-  <label for="results">Search Results:</label>
-  <ul class="list-group text-center">
-    <li *ngFor="let image of searchResults" class="list-group-item list-group-item-primary"><a target="new" href="{{image.link}}">{{image.link}}</a></li>
-  </ul>
+  <table class="table table-bordered table-responsive table-striped table-inverse">
+    <thead>
+      <tr class="bg-success">
+        <th>#</th>
+        <th>Title</th>
+        <th>Link</th>
+        <th>Album</th>
+        <th>NSFW</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let image of searchResults; let i = index">
+        <th scope="row">{{i}}</th>
+        <td>{{image.title}}</td>
+        <td><a target="new" href="{{image.link}}">{{image.link}}</a></td>
+        <td>{{image.is_album}}</td>
+        <td>{{image.nsfw}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <div *ngIf="!searchResults" class="row">
