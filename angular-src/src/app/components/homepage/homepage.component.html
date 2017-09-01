@@ -1,23 +1,26 @@
 <div class="jumbotron text-center">
   <h1>Imgur Search App</h1>
   <p class="lead">Utilizing the Imgur API, Mongodb, Express, Angular4, and Node.js</p>
-  <div class="row">
-    <div class="col-lg-12">
-        <form (submit)="onSearchSubmit()">
-            <div class="form-group">
-              <input type="text" [(ngModel)]="searchString" name="search" class="form-control">
-              <input type="submit" class="btn btn-primary" value="Submit">
-            </div>
-          </form>
+  <form (submit)="getSearchResults()">
+    <div class="form-group">
+      <input type="text" [(ngModel)]="searchString" name="search" class="form-control">
     </div>
-  </div>
+    <input type="submit" class="btn btn-primary" value="Search">
+  </form>
 </div>
 
-<div class="row">
+<div *ngIf="searchResults">
+  <label for="results">Search Results:</label>
+  <ul class="list-group text-center">
+    <li *ngFor="let image of searchResults" class="list-group-item list-group-item-primary"><a target="new" href="{{image.link}}">{{image.link}}</a></li>
+  </ul>
+</div>
+
+<div *ngIf="!searchResults" class="row">
   <div class="col-md-4">
     <h3>User Story:</h3>
     <p>I can get the image URLs, alt text and page urls for a set of images relating to a given search string.</p>
-    <a class="btn btn-default" [routerLink]="['/search']">Search</a>
+    <a class="btn btn-default" [routerLink]="['/']">Search</a>
   </div>
   <div class="col-md-4">
     <h3>User Story:</h3>
@@ -27,6 +30,6 @@
   <div class="col-md-4">
     <h3>User Story:</h3>
     <p>I can get a list of the most recently submitted search strings.</p>
-    <a class="btn btn-default" [routerLink]="['/history']">Previous Searches</a>
+    <a class="btn btn-default" [routerLink]="['/history']">Search History</a>
   </div>
 </div>

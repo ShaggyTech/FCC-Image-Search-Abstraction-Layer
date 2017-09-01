@@ -11,16 +11,13 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { HistoryComponent } from './components/history/history.component';
-import { SearchComponent } from './components/search/search.component';
 import { ApiComponent } from './components/api/api.component';
 
 import {GetHistoryService} from './services/get-history.service';
 import {SearchService} from './services/search.service';
-import { ImagesComponent } from './components/images/images.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomepageComponent},
-  {path: 'search', component: SearchComponent},
   {path: 'history', component: HistoryComponent},
   {path: 'api', component: ApiComponent}
 ]
@@ -31,9 +28,7 @@ const appRoutes: Routes = [
     NavbarComponent,
     HomepageComponent,
     HistoryComponent,
-    SearchComponent,
-    ApiComponent,
-    ImagesComponent
+    ApiComponent
   ],
   imports: [
     BrowserModule,
