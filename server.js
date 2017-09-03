@@ -2,6 +2,7 @@
 
 // NPM Packages and other 
 const express = require('express'),
+      path = require('path'),
       cors = require('cors'), 
       Database = require('./modules/database'),  // Database functions
       Helpers = require('./modules/helpers'),
@@ -16,7 +17,7 @@ require('dotenv').config()
 app.use(cors());
 
 // Static Home page
-app.use(express.static('public'));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.get('/api/imgsearch', Helpers.asyncErrorCatcher(async (req, res, next) => {
   const history = await History.getHistory()

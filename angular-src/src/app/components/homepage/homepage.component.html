@@ -2,10 +2,21 @@
   <h1>Imgur Search App</h1>
   <p class="lead">Utilizing the Imgur API, Mongodb, Express, Angular4, and Node.js</p>
   <form (submit)="getSearchResults()">
-    <div class="form-group">
-      <input type="text" [(ngModel)]="searchString" name="search" class="form-control">
+    <div class="form-group row">
+      <span class="col-sm-11"><input type="text" [(ngModel)]="searchString" name="search" class="form-control"></span>
+      <span class="col-sm-1"><input type="submit" class="btn btn-primary" value="Search"></span>
     </div>
-    <input type="submit" class="btn btn-primary" value="Search">
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="checkbox" [(ngModel)]="albumsCheckBoxValue" class="form-check-input" name="albumsCheckBox" value="">
+        Albums?
+      </label>
+      <label class="form-check-label">
+          <input type="checkbox" [(ngModel)]="nsfwCheckBoxValue" class="form-check-input" name="nsfwCheckBox" value="">
+          NSFW?
+        </label>
+    </div>
+    
   </form>
 </div>
 
@@ -13,7 +24,6 @@
   <table class="table table-bordered table-responsive table-striped table-inverse">
     <thead>
       <tr class="bg-success">
-        <th>#</th>
         <th>Title</th>
         <th>Link</th>
         <th>Album</th>
@@ -21,31 +31,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let image of searchResults; let i = index">
-        <th scope="row">{{i}}</th>
+      <tr *ngFor="let image of (searchResults | searchFilter: {albums: albumsCheckBoxValue, nsfw: nsfwCheckBoxValue}) | paginate: { itemsPerPage: 15, currentPage: page }">
         <td>{{image.title}}</td>
         <td><a target="new" href="{{image.link}}">{{image.link}}</a></td>
-        <td>{{image.is_album}}</td>
-        <td>{{image.nsfw}}</td>
+        <td>
+          <div [ngSwitch]="image.is_album">
+            <i *ngSwitchCase="true" class="material-icons">check</i>
+            <i *ngSwitchCase="false" class="material-icons">close</i>
+          </div>
+        </td>
+        <td>
+          <div [ngSwitch]="image.nsfw">
+            <i *ngSwitchCase="true" class="material-icons">check</i>
+            <i *ngSwitchCase="false" class="material-icons">close</i>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
-</div>
-
-<div *ngIf="!searchResults" class="row">
-  <div class="col-md-4">
-    <h3>User Story:</h3>
-    <p>I can get the image URLs, alt text and page urls for a set of images relating to a given search string.</p>
-    <a class="btn btn-default" [routerLink]="['/']">Search</a>
-  </div>
-  <div class="col-md-4">
-    <h3>User Story:</h3>
-    <p> I can paginate through the responses by adding a ?offset=2 parameter to the URL.</p>
-    <a class="btn btn-default" [routerLink]="['/api']">Back-end API</a>
-  </div>
-  <div class="col-md-4">
-    <h3>User Story:</h3>
-    <p>I can get a list of the most recently submitted search strings.</p>
-    <a class="btn btn-default" [routerLink]="['/history']">Search History</a>
-  </div>
+  <pagination-controls (pageChange)="page = $event" class="pagination-controls"></pagination-controls>
 </div>

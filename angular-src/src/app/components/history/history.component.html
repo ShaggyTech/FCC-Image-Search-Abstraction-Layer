@@ -1,7 +1,10 @@
-<div *ngIf="history" id="historyList">
+<div *ngIf="history">
   <ul class="list-group text-center">
-    <li class="list-group-item list-group-item-info">Search History:</li>
+    <li class="list-group-item list-group-item-success">Search History:</li>
 
-    <li *ngFor="let item of history" class="list-group-item list-group-item-primary">{{item}}</li>
+    <li *ngFor="let item of history | paginate: { itemsPerPage: 15, currentPage: page }" class="list-group-item list-group-item-primary">
+      {{item}}
+    </li>
   </ul>
+  <pagination-controls (pageChange)="page = $event" class="pagination-controls"></pagination-controls>
 </div>

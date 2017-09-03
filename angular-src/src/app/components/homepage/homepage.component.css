@@ -1,0 +1,4 @@
+.pagination-controls /deep/ .ngx-pagination .current {
+    background: red;
+    color: white;
+  }

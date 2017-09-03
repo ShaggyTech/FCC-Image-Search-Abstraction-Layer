@@ -5,7 +5,6 @@ const request = require('request-promise'),
 
 const parseImgurResponse = async (searchResults) => {
   const parsedResult = await JSON.parse(searchResults)
-  console.log(parsedResult)
   return await parsedResult.data.map((data) => {
     return {
       title: data.title,

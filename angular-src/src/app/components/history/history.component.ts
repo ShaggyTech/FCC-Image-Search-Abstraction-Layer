@@ -13,7 +13,6 @@ export class HistoryComponent implements OnInit {
   constructor(private gethistoryService:GetHistoryService, private router:Router) { }
 
   ngOnInit () {
-    
     this.gethistoryService.getHistory().subscribe(history => {
       this.history = history.history
     })

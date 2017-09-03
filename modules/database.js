@@ -21,7 +21,6 @@ const insertUpdate = async (queryString) => {
 const findUnique = async () => {
   return await collection.find({}, {_id: 0, lastModified: 0})
   .sort({lastModified: -1})
-  .limit(15)
   .toArray()
 }
 

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule, Routes} from '@angular/router';
 
@@ -15,6 +15,8 @@ import { ApiComponent } from './components/api/api.component';
 
 import {GetHistoryService} from './services/get-history.service';
 import {SearchService} from './services/search.service';
+
+import {SearchFilter} from './pipes/search-filter.pipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomepageComponent},
@@ -28,14 +30,16 @@ const appRoutes: Routes = [
     NavbarComponent,
     HomepageComponent,
     HistoryComponent,
-    ApiComponent
+    ApiComponent,
+    SearchFilter
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgxPaginationModule
   ],
   providers: [GetHistoryService, SearchService],
   bootstrap: [AppComponent]

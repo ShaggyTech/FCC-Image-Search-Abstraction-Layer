@@ -9,8 +9,6 @@ export class SearchService {
   constructor(private http:Http) { }
 
   searchImgur = (searchOptions) => {
-    const url = `http://localhost:3000/api/imgsearch/${searchOptions.searchString}`
-    console.log(url)
     let headers = new Headers()
     headers.append('Content-Type', 'application/json')
     return this.http.get(`http://localhost:3000/api/imgsearch/${searchOptions.searchString}`, {headers: headers})
