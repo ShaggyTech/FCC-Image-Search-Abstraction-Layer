@@ -8,30 +8,35 @@
     </div>
     <div class="form-check">
       <label class="form-check-label">
-        <input type="checkbox" [(ngModel)]="albumsCheckBoxValue" class="form-check-input" name="albumsCheckBox" value="">
-        Albums?
+        <input type="checkbox" [(ngModel)]="albumCheckBoxValue" class="form-check-input" name="albumCheckBox" value="">
+        Album?
       </label>
       <label class="form-check-label">
-          <input type="checkbox" [(ngModel)]="nsfwCheckBoxValue" class="form-check-input" name="nsfwCheckBox" value="">
-          NSFW?
-        </label>
+        <input type="checkbox" [(ngModel)]="nsfwCheckBoxValue" class="form-check-input" name="nsfwCheckBox" value="">
+        NSFW?
+      </label>
     </div>
-    
   </form>
 </div>
-
+<flash-messages></flash-messages>
 <div *ngIf="searchResults">
-  <table class="table table-bordered table-responsive table-striped table-inverse">
-    <thead>
+  <table class="table table-bordered table-responsive table-striped">
+    <thead class="thead-inverse">
       <tr class="bg-success">
         <th>Title</th>
         <th>Link</th>
-        <th>Album</th>
-        <th>NSFW</th>
+        <th (click)="albumCheckBoxValue ? albumCheckBoxValue = false : albumCheckBoxValue = true">
+          Album
+        </th>
+        <th (click)="nsfwCheckBoxValue ? nsfwCheckBoxValue = false : nsfwCheckBoxValue = true">
+          NSFW
+        </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let image of (searchResults | searchFilter: {albums: albumsCheckBoxValue, nsfw: nsfwCheckBoxValue}) | paginate: { itemsPerPage: 15, currentPage: page }">
+      <tr *ngFor="let image of searchResults | 
+          searchFilter: {albums: albumCheckBoxValue, nsfw: nsfwCheckBoxValue} | 
+          paginate: { itemsPerPage: 15, currentPage: page }">
         <td>{{image.title}}</td>
         <td><a target="new" href="{{image.link}}">{{image.link}}</a></td>
         <td>

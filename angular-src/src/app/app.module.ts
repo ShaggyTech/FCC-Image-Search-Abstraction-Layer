@@ -13,10 +13,11 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { HistoryComponent } from './components/history/history.component';
 import { ApiComponent } from './components/api/api.component';
 
-import {GetHistoryService} from './services/get-history.service';
 import {SearchService} from './services/search.service';
 
 import {SearchFilter} from './pipes/search-filter.pipe';
+
+import {FlashMessagesModule} from 'angular2-flash-messages';
 
 const appRoutes: Routes = [
   {path: '', component: HomepageComponent},
@@ -39,9 +40,10 @@ const appRoutes: Routes = [
     HttpModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    NgxPaginationModule
+    NgxPaginationModule,
+    FlashMessagesModule
   ],
-  providers: [GetHistoryService, SearchService],
+  providers: [SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

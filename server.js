@@ -13,6 +13,8 @@ const express = require('express'),
 // Lets us know if Database.connect() has been called once since the app started
 let initialized = false;
 
+const port = process.env.PORT || 8080
+
 require('dotenv').config()
 app.use(cors());
 
@@ -55,7 +57,7 @@ app.use((err, req, res, next) => {
 })
 
 // Listen for requests and saves the DB collection information if this is the first connection
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(port, () => {
   console.log('Your app is listening on port ' + server.address().port);
   if (!initialized) {
     Database.connect()

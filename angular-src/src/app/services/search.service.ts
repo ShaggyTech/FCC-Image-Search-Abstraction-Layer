@@ -4,14 +4,32 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class SearchService {
-  searchOptions:Object
+  searchOptions: Object
+  isDev: boolean
 
-  constructor(private http:Http) { }
+  constructor(private http:Http) {
+    this.isDev = true; // Change to false before deployment
+  }
 
-  searchImgur = (searchOptions) => {
+  callBackEnd = (searchOptions) => {
     let headers = new Headers()
     headers.append('Content-Type', 'application/json')
-    return this.http.get(`http://localhost:3000/api/imgsearch/${searchOptions.searchString}`, {headers: headers})
+    let ep = this.prepEndpoint('api/imgsearch');
+    if (searchOptions.searchString) {
+      return this.http.get(`${ep}${searchOptions.searchString}`, {headers: headers})
       .map(res => res.json())
+    }
+    else {
+      return this.http.get(ep, {headers: headers})
+      .map(res => res.json())
+    }
+  }
+  
+  prepEndpoint(ep){
+    if(this.isDev){
+      return ep;
+    } else {
+      return 'http://localhost:3000/'+ep;
+    }
   }
 }

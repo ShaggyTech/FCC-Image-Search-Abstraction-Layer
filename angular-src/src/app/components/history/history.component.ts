@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import {Router} from '@angular/router'
-import {GetHistoryService} from '../../services/get-history.service'
+import {SearchService} from '../../services/search.service'
 
 @Component({
   selector: 'app-history',
@@ -10,12 +10,11 @@ import {GetHistoryService} from '../../services/get-history.service'
 export class HistoryComponent implements OnInit {
   history:Array<string>
 
-  constructor(private gethistoryService:GetHistoryService, private router:Router) { }
+  constructor(private searchService:SearchService, private router:Router) { }
 
   ngOnInit () {
-    this.gethistoryService.getHistory().subscribe(history => {
-      this.history = history.history
+    this.searchService.callBackEnd({}).subscribe(data => {
+      this.history = data.history
     })
   }
-
 }
