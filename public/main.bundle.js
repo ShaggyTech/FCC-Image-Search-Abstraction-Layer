@@ -478,7 +478,7 @@ let SearchService = class SearchService {
         this.callBackEnd = (searchOptions) => {
             let headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
             headers.append('Content-Type', 'application/json');
-            let ep = this.prepEndpoint('api/imgsearch');
+            let ep = this.prepEndpoint('api/imgsearch/');
             if (searchOptions.searchString) {
                 return this.http.get(`${ep}${searchOptions.searchString}`, { headers: headers })
                     .map(res => res.json());

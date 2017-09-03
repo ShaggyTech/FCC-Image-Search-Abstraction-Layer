@@ -14,7 +14,7 @@ export class SearchService {
   callBackEnd = (searchOptions) => {
     let headers = new Headers()
     headers.append('Content-Type', 'application/json')
-    let ep = this.prepEndpoint('api/imgsearch');
+    let ep = this.prepEndpoint('api/imgsearch/');
     if (searchOptions.searchString) {
       return this.http.get(`${ep}${searchOptions.searchString}`, {headers: headers})
       .map(res => res.json())
