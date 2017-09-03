@@ -18,6 +18,9 @@ const port = process.env.PORT || 8080
 require('dotenv').config()
 app.use(cors());
 
+// Static Home page
+app.use('/', express.static(path.join(__dirname, 'public')));
+
 app.get('/api/imgsearch', Helpers.asyncErrorCatcher(async (req, res, next) => {
   const history = await History.getHistory()
   res.json(history)
