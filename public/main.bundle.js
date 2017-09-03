@@ -492,10 +492,10 @@ let SearchService = class SearchService {
     }
     prepEndpoint(ep) {
         if (this.isDev) {
-            return ep;
+            return 'http://localhost:3000/' + ep;
         }
         else {
-            return 'http://localhost:3000/' + ep;
+            return ep;
         }
     }
 };

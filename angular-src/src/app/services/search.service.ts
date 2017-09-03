@@ -27,9 +27,9 @@ export class SearchService {
   
   prepEndpoint(ep){
     if(this.isDev){
-      return ep;
-    } else {
       return 'http://localhost:3000/'+ep;
+    } else {
+      return ep;
     }
   }
 }
