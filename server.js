@@ -19,7 +19,7 @@ require('dotenv').config()
 app.use(cors());
 
 // Static Home page
-app.use('/', express.static(path.join(__dirname, 'docs')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.get('/api/imgsearch', Helpers.asyncErrorCatcher(async (req, res, next) => {
   const history = await History.getHistory()
